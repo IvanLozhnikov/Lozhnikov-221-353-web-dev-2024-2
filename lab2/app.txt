@@ -1,0 +1,58 @@
+from flask import Flask, render_template, request, make_response
+
+app = Flask(__name__)
+
+opers = ['+', '-', '*', '/']
+
+@app.route('/')
+def index():
+
+    return render_template('index.html')
+
+@app.route('/agrs')
+def args():
+    return render_template('args.html')
+
+@app.route('/headers')
+def headers():
+    return render_template('headers.html')
+
+@app.route('/cookie')
+def cookie():
+    resp = make_response(render_template('cookie.html'))
+    if 'username' in request.cookies:
+        resp.set_cookie('username','Ivan',expires=0)
+    else:
+        resp.set_cookie('username','Ivan')
+    return resp
+
+@app.route('/form',methods=['get','post'])
+def form():
+    return render_template('form.html')
+
+@app.route('/calc')
+def calc():
+    error_msg = False
+    result = False
+    try:
+        num1 = float(request.args.get('num1',0))
+        num2 = float(request.args.get('num2',0)) 
+        operator = request.args.get('operator')
+        result = count(num1, num2, operator)
+    except ValueError:
+        error_msg = 'Необходимо вводить числа'
+    except ZeroDivisionError:
+        error_msg = 'делить на ноль нельзя'
+    return render_template('calc.html', opers = opers, result = result ,error = error_msg)
+
+
+
+def count(num1, num2, operator):
+    if operator == '+':
+        return num1 + num2
+    elif operator == '-':
+        return num1 - num2
+    elif operator == '*':
+        return num1 * num2
+    elif operator == '/':
+        return num1 / num2
