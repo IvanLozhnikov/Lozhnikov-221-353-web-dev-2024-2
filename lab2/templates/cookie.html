@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Ваши куки</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ключ</th>
+            <th>Значение</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for key, value in request.cookies.items() %}
+    <tr>
+        <td> {{key}} </td>
+        <td> {{value}} </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
