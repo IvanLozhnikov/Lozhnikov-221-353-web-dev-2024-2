@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block content %}
+<form method="post">
+  <div class="mb-3">
+    <label for="loginInput" class="form-label">Логин</label>
+    <input
+      type="text"
+      class="form-control {% if errorm %}is-invalid{% endif %}"
+      id="loginInput"
+      name="loginInput"
+      placeholder="Логин"
+    />
+        <div class="invalid-feedback">
+            {{ errorm }}
+        </div>
+  </div>
+  <div class="mb-3">
+    <label for="passwordInput" class="form-label">Пароль</label>
+    <input
+      type="password"
+      class="form-control {% if errorm1 %}is-invalid{% endif %}"
+      id="passwordInput"
+      name="passwordInput"
+      placeholder="Пароль"
+    />
+        <div class="invalid-feedback">
+            {{ errorm1 }}
+        </div>
+  </div>
+  <div class="mb-3">
+    <label for="firstNameInput" class="form-label">Имя</label>
+    <input
+      type="text"
+      class="form-control {% if errorm2 %}is-invalid{% endif %}"
+      id="firstNameInput"
+      name="firstNameInput"
+      placeholder="Имя"
+    />
+        <div class="invalid-feedback">
+            {{ errorm2 }}
+        </div>
+  <div class="mb-3">
+    <label for="lastNameInput" class="form-label">Фамилия</label>
+    <input
+      type="text"
+      class="form-control"
+      id="lastNameInput"
+      name="lastNameInput"
+      placeholder="Фамилия"
+
+    />
+  </div>
+  <div class="mb-3">
+    <label for="middleNameInput" class="form-label">Отчество</label>
+    <input
+      type="text"
+      class="form-control"
+      id="middleNameInput"
+      name="middleNameInput"
+      placeholder="Отчество"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="RoleIdInput" class="form-label">Роль</label>
+    <select name="RoleIdInput" id="RoleIdInput" >
+      <option value="1">Админ</option>
+      <option value="2">Пользователь</option>
+      <option value="3">Дух</option>
+  </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+{% endblock %}

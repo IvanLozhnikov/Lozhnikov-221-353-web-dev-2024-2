@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block content %}
+<form method="post">
+  <div class="mb-3">
+    <label for="passwordInput1" class="form-label">Старый пароль</label>
+    <input
+      type="password"
+      class="form-control {% if errorm %}is-invalid{% endif %}"
+      id="passwordInput1"
+      name="passwordInput1"
+      placeholder="Пароль"
+      required
+    />
+    <div class="invalid-feedback">
+      {{ errorm }}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="passwordInput2" class="form-label">Новый пароль</label>
+    <input
+      type="password"
+      class="form-control {% if errorm1 %}is-invalid{% endif %}"
+      id="passwordInput2"
+      name="passwordInput2"
+      placeholder="Новый пароль"
+      required
+    />
+    <div class="invalid-feedback">
+      {{ errorm1 }}
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="passwordInput3" class="form-label">Повторите пароль</label>
+    <input
+      type="password"
+      class="form-control {% if errorm2 %}is-invalid{% endif %}"
+      id="passwordInput3"
+      name="passwordInput3"
+      placeholder="Повторение пароля"
+      required
+    />
+    <div class="invalid-feedback">
+      {{ errorm2 }}
+  </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Обновить</button>
+</form>
+{% endblock %}

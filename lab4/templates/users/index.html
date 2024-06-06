@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Логин</th>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Роль</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for id, login, first_name, last_name, middle_name, role_id in users %}
+    
+    <tr>
+        <td>{{id}}</td>
+        <td>{{login}}</td>
+        <td>{{first_name}}</td>
+        <td>{{last_name}}</td>
+        <td>{{middle_name}}</td>
+        <td>{{role_id}}</td>
+
+        <td>
+            <a href="{{ url_for('view_user', user_id=id) }}" class="btn btn-primary">Просмотр</a>
+            <a href="{{ url_for('edit_user', user_id=id) }}" class="btn btn-warning">Редактирование</a>
+            <button type="button" class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#DELETERequestModal{{id}}">Удалить</button>
+            <div class="modal fade request-modal" id="DELETERequestModal{{id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Вы уверены, что хотите удалить пользователя {{first_name}} {{last_name}} {{middle_name}}?</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form class="add-request-form add-event-1">
+                            <div>
+                                <button class="btn btn-dark" data-bs-dismiss="modal">Нет</button>
+                                <a href="{{ url_for('delete_user', user_id=id) }}" class="btn btn-danger">Да</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <a href="{{ url_for('change_user_pas', user_id=id) }}" class="btn btn-info">Изменить пароль</a> -->
+        </td>
+        
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+        <a class="btn btn-success {%if request.endpoint == 'logout'%}active{% endif%}" aria-current="page" href="{{url_for('register')}}">Добавить пользователя</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
