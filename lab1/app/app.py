@@ -2,6 +2,7 @@ import random
 from flask import Flask, render_template
 from faker import Faker
 
+
 fake = Faker()
 app = Flask(__name__)
 
@@ -31,6 +32,15 @@ def generate_post(i):
         'image_id': f'{images_ids[i]}.jpg',
         'comments': generate_comments()
     }
+def get_post(i):
+    return {
+        'title': 'Заголовок поста',
+        'text': fake.paragraph(nb_sentences=100),
+        'author': fake.name(),
+        'date': fake.date_time_between(start_date='-2y', end_date='now'),
+        'image_id': f'{images_ids[i]}.jpg',
+        'comments': generate_comments()
+    }
 
 posts_list = sorted([generate_post(i) for i in range(5)], key=lambda p: p['date'], reverse=True)
 
@@ -48,5 +58,7 @@ def about():
     return render_template('about.html')
 
 @app.route('/post/<int:index>')
-def id_post():
-    return render_template('post.html', index=index)
+def id_post(index):
+    post = get_post(index) 
+    return render_template('post.html', index = index, post=post)
+
